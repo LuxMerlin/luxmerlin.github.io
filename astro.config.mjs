@@ -5,7 +5,7 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://luxmerlin.github.io',
-  base: '/luxmerlin.github.it/',
+site: 'https://luxmerlin.github.io',
+  base: '/',
   integrations: [mdx()]
 });
