@@ -69,7 +69,25 @@ package.json file, I can make changes to this project (commit the change) then r
 
 ---
 
-## 5. Future Roadmap
+## 5. Intresting learning
+
+### Github pages default behavior
+One intresting part of working with Github pages is working with its default behavior and how to get around it. By default Github assmues you are using
+jekyll when creating pages from your repos, as I am using astro and not jekyll this means that by default Github will not render the site as the output stucture of the static site is not what
+Github is expecting. 
+
+To account for this you need to config the astro.config.mjs file to include a few extre bits of metadata for its static site generation to allow for the site to access the correct files, this paired with
+the gh-pages tool will allow for Github to be able to read the site when you load it (as you can see by being able to read this).
+
+However the is on more thing that will break the site if you are using astro. Remember how Github defaults to jekyll? what this means for astro is Github will block
+the site from access any external files i.e CSS style sheets. The fix for this is simple, you include a .nojekyll file in your public folder and that should be the end of it. It was not, i later found that gh-pages by default ignores dotfiles
+(this makes sense to be honest), as a result the .nojekyll was not being deployed to the branch. In the end it was as simple as added --dotfiles to the end of the deploy command to include the file, allow the site to render with CSS.
+
+Why do I find this intresting? Simple, I picked Astro and Github pages as away to more away from complex stacks as away to create this site quickly and maintain it easily, and this is still true. But its a great example of no matter how much you try to 
+keep things simple, there will always be an issue, a missing config that you need to find, a magic flag for a command that will solve your current issues. Its a nice way to see that no matter what, you need to be able to understand what your making your projects with
+and be able to solve annoying problums.
+
+## 6. Future Roadmap
 
 - [ ] Add site-wide full-text search (e.g., Pagefind)
 - [ ] Category and tag filtering for blog posts
