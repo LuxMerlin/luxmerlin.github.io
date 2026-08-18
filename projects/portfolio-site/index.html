@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><meta name="generator" content="Astro v7.2.1"><title>R O'Donnell
+		</title><link rel="stylesheet" href="/_astro/Layout.CCyKQed7.css"><style>.project-page[data-astro-cid-yq2gsstb]{padding-top:var(--space-lg)}.back-link[data-astro-cid-yq2gsstb]{margin-bottom:var(--space-xl)}.back-link[data-astro-cid-yq2gsstb] a[data-astro-cid-yq2gsstb]{color:var(--text-muted);font-weight:500}.back-link[data-astro-cid-yq2gsstb] a[data-astro-cid-yq2gsstb]:hover{color:var(--accent-primary)}.project-header[data-astro-cid-yq2gsstb]{margin-bottom:var(--space-xl);padding-bottom:var(--space-lg);border-bottom:1px solid var(--border-color)}.title[data-astro-cid-yq2gsstb]{margin-bottom:var(--space-md);font-size:clamp(2.5rem,4vw,3.5rem)}.description[data-astro-cid-yq2gsstb]{margin-bottom:var(--space-lg);max-width:800px;font-size:1.25rem}.tags[data-astro-cid-yq2gsstb]{flex-wrap:wrap;gap:.5rem;list-style:none;display:flex}.tag[data-astro-cid-yq2gsstb]{border:1px solid var(--border-color);color:var(--text-main);background:#ffffff0d;border-radius:999px;padding:.25rem 1rem;font-size:.875rem;font-weight:600}
+</style></head><body><header class="main-header" data-astro-cid-nen7h5rs><div class="header-content" data-astro-cid-nen7h5rs><a href="/" class="logo" data-astro-cid-nen7h5rs><span class="text-gradient first-name" data-astro-cid-nen7h5rs>Ryan</span>O'Donnell</a><nav data-astro-cid-nen7h5rs><ul class="nav-links" data-astro-cid-nen7h5rs><li data-astro-cid-nen7h5rs><a href="/" data-astro-cid-nen7h5rs>Home</a></li><li data-astro-cid-nen7h5rs><a href="/projects" data-astro-cid-nen7h5rs>Project</a></li><li data-astro-cid-nen7h5rs><a href="/blog" data-astro-cid-nen7h5rs>Blog</a></li></ul></nav></div></header><main class="project-page" data-astro-cid-yq2gsstb><div class="back-link" data-astro-cid-yq2gsstb><a href="/" data-astro-cid-yq2gsstb>&larr; Back to Home</a></div><header class="project-header animate-fade-in" data-astro-cid-yq2gsstb><h1 class="title" data-astro-cid-yq2gsstb>Personal Portfolio &amp; Content Platform</h1><p class="description text-muted" data-astro-cid-yq2gsstb>Technical architecture, stack evaluation, trade-off analysis, and implementation notes.</p><ul class="tags" data-astro-cid-yq2gsstb><li class="tag" data-astro-cid-yq2gsstb>astro</li><li class="tag" data-astro-cid-yq2gsstb>mdx</li><li class="tag" data-astro-cid-yq2gsstb>TypeScript</li><li class="tag" data-astro-cid-yq2gsstb>Node.js</li><li class="tag" data-astro-cid-yq2gsstb>web-development</li></ul></header><article class="prose animate-fade-in" style="animation-delay: 0.2s;" data-astro-cid-yq2gsstb><h1 id="personal-portfolio--content-platform">Personal Portfolio &amp; Content Platform</h1>
+<p>A fast, lightweight, and maintainable personal portfolio and blog built to eliminate architectural friction, avoid over-engineering backend systems, and establish a seamless content-first publishing workflow.</p>
+<hr/>
+<h2 id="1-executive-summary--goals">1. Executive Summary &amp; Goals</h2>
+<p>The primary goal of this project was to overcome developer inertia and ship a functional, production-ready portfolio. Rather than getting bogged down architecting complex full-stack backends or dynamic databases, the project prioritises content velocity, fast load times, and minimal maintenance overhead.</p>
+<h3 id="motivation">Motivation</h3>
+<p>My main motivation for this project so to have a central place that i can show off project I created or ideas for anyone that is intrested, be that recruiters or someone in the open-source community.</p>
+<h2 id="but-i-would-be-remiss-if-i-wasnt-honest-to-the-fact-that-i-have-been-putting-off-making-myself-a-portfolio-for-a-number-of-years">But I would be remiss if I wasn’t honest to the fact that I have been putting off making myself a portfolio for a number of years.</h2>
+<h2 id="2-selected-tech-stack--key-benefits">2. Selected Tech Stack &amp; Key Benefits</h2>
+<p>The architecture centers around an ultra-lean static stack optimized for developer velocity and zero-runtime bloat.</p>
+<h3 id="astro-core-framework">Astro (Core Framework)</h3>
+<p>A modern static-first framework designed specifically for content-heavy websites using an <strong>Islands Architecture</strong>.</p>
+<ul>
+<li><strong>Zero JavaScript by Default:</strong> Generates pure static HTML/CSS, resulting in near-instant load speeds and perfect Lighthouse scores.</li>
+<li><strong>Layout-Driven Architecture:</strong> Reusable layouts wrap content pages automatically, eliminating repetitive boilerplate.</li>
+<li><strong>Fast Developer Experience:</strong> Intuitive file-based routing and minimal configuration enabled a baseline working site in under an hour.</li>
+</ul>
+<h3 id="mdx-markdown--components">MDX (Markdown + Components)</h3>
+<p>Combines the simplicity of Markdown authoring with the power of interactive UI components.</p>
+<ul>
+<li><strong>Content-First Workflow:</strong> Creating a new blog post or case study is as simple as adding a standard <code>.mdx</code> file to the content directory.</li>
+<li><strong>Zero Database Overhead:</strong> All content lives directly in Git version control without needing a headless CMS or external database setup.</li>
+<li><strong>Component Extensibility:</strong> Easily drop interactive components (code sandboxes, interactive widgets, callout boxes) directly inside Markdown when needed.</li>
+<li><strong>Core Benefit: Reduced Cognitive Load</strong> By removing traditional database setup, API layers, and complex client-side state management, the friction to publish and maintain the site drops to near zero.</li>
+</ul>
+<hr/>
+<h2 id="3-technology-comparison--alternatives-evaluated">3. Technology Comparison &amp; Alternatives Evaluated</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Technology</th>
+<th style="text-align:left">Evaluation</th>
+<th style="text-align:left">Key Advantages</th>
+<th style="text-align:left">Trade-offs &amp; Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Astro + MDX</strong></td>
+<td style="text-align:left"><strong>Chosen</strong></td>
+<td style="text-align:left">Near-zero JS bundle, built-in MDX parsing, rapid setup, minimal mental overhead.</td>
+<td style="text-align:left">Not designed for highly dynamic, state-heavy Single Page Applications (SPAs).</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Next.js / Remix</strong></td>
+<td style="text-align:left"><em>Alternative</em></td>
+<td style="text-align:left">Massive ecosystem, server-side rendering (SSR), robust full-stack React tools.</td>
+<td style="text-align:left">Overkill for static content; larger client bundles; frequent breaking API changes.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Gatsby</strong></td>
+<td style="text-align:left"><em>Alternative</em></td>
+<td style="text-align:left">Mature plugin ecosystem, unified GraphQL data layer for multiple sources.</td>
+<td style="text-align:left">Heavy configuration; slow build times; GraphQL overhead for simple Markdown.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Hugo / 11ty</strong></td>
+<td style="text-align:left"><em>Alternative</em></td>
+<td style="text-align:left">Blazing fast build times, zero/minimal Node dependencies, simple templating.</td>
+<td style="text-align:left">Lacks seamless integration with modern UI component frameworks (React/Vue/Svelte islands).</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Notion / Headless CMS</strong></td>
+<td style="text-align:left"><em>Alternative</em></td>
+<td style="text-align:left">Non-technical WYSIWYG editor, easy rich-text writing.</td>
+<td style="text-align:left">Requires API integrations, subject to rate limits, vendor lock-in, styling limitations.</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="4-implementation-details">4. Implementation Details</h2>
+<h3 id="deployment--cicd-pipeline">Deployment &amp; CI/CD Pipeline</h3>
+<p>Following the core beneift of this project being reducing the cognitive by removing alot of the more traditional setups I wanted to keep the deployments of the site simple as well.
+For this reason I optited to use <a href="https://docs.github.com/en/pages">Github Pages</a>.</p>
+<p>Why? Because for a staticly deployed site it just makes sense, there is no need to worry about where to host the files, setting up a DNS record to put your domain to
+the site keeping the maintainable high as well as allow me to update things quickly without any complex deployment systems.</p>
+<p>The heavy lifting for this is done by a npm package by tschaub called <a href="https://www.npmjs.com/package/gh-pages">gh-pages</a>. By using this project and a simple command in the projects
+package.json file, I can make changes to this project (commit the change) then run the command <code>npm run deploy</code>. This would then build the site locally before pushing to a branch called gh-pages.</p>
+<hr/>
+<h2 id="5-future-roadmap">5. Future Roadmap</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> Add site-wide full-text search (e.g., Pagefind)</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Category and tag filtering for blog posts</li>
+</ul></article></main><footer class="main-footer" data-astro-cid-jo6i4kqk><div class="footer-content" data-astro-cid-jo6i4kqk><p data-astro-cid-jo6i4kqk>&copy; 2026 Senior SWE Portfolio. Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" data-astro-cid-jo6i4kqk>Astro</a>.</p></div></footer></body></html>
