@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<Layout title="Projects - Senior Software Engineer">
+  <main class="project-index">
+    <header class="page-header animate-fade-in">
+      <h1 class="title"><span class="text-gradient">Projects</span></h1>
+      <p class="subtitle text-muted">Personal & Work Projects</p>
+    </header>
+
+    <div class="grid animate-fade-in" style="animation-delay: 0.2s;">
+      {sortedProjects.map((project) => (
+        <ProjectCard 
+            title={project.data.title}
+            description={project.data.description || "Read more about this project in the full article."}
+            url={`/projects/${project.id}`}
+            tags={project.data.tags}
+          />
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .project-index {
+    padding-top: var(--space-lg);
+  }
+
+  .page-header {
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+  }
+</style>

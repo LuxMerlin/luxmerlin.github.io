@@ -1,0 +1,75 @@
+---
+title: "Personal Portfolio & Content Platform"
+description: "Technical architecture, stack evaluation, trade-off analysis, and implementation notes."
+publishDate: "2026-08-18"
+tags: ["astro", "mdx","TypeScript", "Node.js", "web-development"]
+featured: true
+---
+
+# Personal Portfolio & Content Platform
+
+A fast, lightweight, and maintainable personal portfolio and blog built to eliminate architectural friction, avoid over-engineering backend systems, and establish a seamless content-first publishing workflow.
+
+---
+
+## 1. Executive Summary & Goals
+
+The primary goal of this project was to overcome developer inertia and ship a functional, production-ready portfolio. Rather than getting bogged down architecting complex full-stack backends or dynamic databases, the project prioritises content velocity, fast load times, and minimal maintenance overhead.
+
+### Motivation
+My main motivation for this project so to have a central place that i can show off project I created or ideas for anyone that is intrested, be that recruiters or someone in the open-source community.
+
+But I would be remiss if I wasn't honest to the fact that I have been putting off making myself a portfolio for a number of years.
+---
+
+## 2. Selected Tech Stack & Key Benefits
+
+The architecture centers around an ultra-lean static stack optimized for developer velocity and zero-runtime bloat.
+
+### Astro (Core Framework)
+A modern static-first framework designed specifically for content-heavy websites using an **Islands Architecture**.
+
+- **Zero JavaScript by Default:** Generates pure static HTML/CSS, resulting in near-instant load speeds and perfect Lighthouse scores.
+- **Layout-Driven Architecture:** Reusable layouts wrap content pages automatically, eliminating repetitive boilerplate.
+- **Fast Developer Experience:** Intuitive file-based routing and minimal configuration enabled a baseline working site in under an hour.
+
+### MDX (Markdown + Components)
+Combines the simplicity of Markdown authoring with the power of interactive UI components.
+
+- **Content-First Workflow:** Creating a new blog post or case study is as simple as adding a standard `.mdx` file to the content directory.
+- **Zero Database Overhead:** All content lives directly in Git version control without needing a headless CMS or external database setup.
+- **Component Extensibility:** Easily drop interactive components (code sandboxes, interactive widgets, callout boxes) directly inside Markdown when needed.
+- **Core Benefit: Reduced Cognitive Load** By removing traditional database setup, API layers, and complex client-side state management, the friction to publish and maintain the site drops to near zero.
+
+---
+
+## 3. Technology Comparison & Alternatives Evaluated
+
+| Technology | Evaluation | Key Advantages | Trade-offs & Limitations |
+| :--- | :--- | :--- | :--- |
+| **Astro + MDX** | **Chosen** | Near-zero JS bundle, built-in MDX parsing, rapid setup, minimal mental overhead. | Not designed for highly dynamic, state-heavy Single Page Applications (SPAs). |
+| **Next.js / Remix** | *Alternative* | Massive ecosystem, server-side rendering (SSR), robust full-stack React tools. | Overkill for static content; larger client bundles; frequent breaking API changes. |
+| **Gatsby** | *Alternative* | Mature plugin ecosystem, unified GraphQL data layer for multiple sources. | Heavy configuration; slow build times; GraphQL overhead for simple Markdown. |
+| **Hugo / 11ty** | *Alternative* | Blazing fast build times, zero/minimal Node dependencies, simple templating. | Lacks seamless integration with modern UI component frameworks (React/Vue/Svelte islands). |
+| **Notion / Headless CMS** | *Alternative* | Non-technical WYSIWYG editor, easy rich-text writing. | Requires API integrations, subject to rate limits, vendor lock-in, styling limitations. |
+
+---
+
+## 4. Implementation Details
+
+### Deployment & CI/CD Pipeline
+Following the core beneift of this project being reducing the cognitive by removing alot of the more traditional setups I wanted to keep the deployments of the site simple as well.
+For this reason I optited to use [Github Pages](https://docs.github.com/en/pages).
+
+Why? Because for a staticly deployed site it just makes sense, there is no need to worry about where to host the files, setting up a DNS record to put your domain to 
+the site keeping the maintainable high as well as allow me to update things quickly without any complex deployment systems.
+
+The heavy lifting for this is done by a npm package by tschaub called [gh-pages](https://www.npmjs.com/package/gh-pages). By using this project and a simple command in the projects
+package.json file, I can make changes to this project (commit the change) then run the command ```npm run deploy```. This would then build the site locally before pushing to a branch called gh-pages. 
+
+---
+
+## 5. Future Roadmap
+
+- [ ] Add site-wide full-text search (e.g., Pagefind)
+- [ ] Category and tag filtering for blog posts

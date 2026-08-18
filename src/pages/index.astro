@@ -1,11 +1,189 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import { skills, type Skill, type SkillGroup } from '../data/skills';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allProjects = await getCollection('projects');
+const allPosts = await getCollection('blog');
+
+const sortedPosts = allPosts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const recentPosts = sortedPosts.slice(0, 2);
+
+const featuredProjects = allProjects.filter(a=> a.data.featured == true);
+const allSkills = skills.flatMap(group => group.items);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Senior Software Engineer Portfolio">
+  <main>
+    <section class="hero animate-fade-in">
+      <div class="hero-content">
+        <h1 class="title">Hi, I'm a <span class="text-gradient">Ryan O'Donnell</span>.</h1>
+        <p class="subtitle text-muted">A Senior Software Engineer who loves building robust, scalable systems and solving everyday issues.</p>
+        <div class="hero-actions">
+          <a href="/projects" class="btn primary-btn">View My Work</a>
+          <a href="/blog" class="btn secondary-btn">Read the Blog</a>
+        </div>
+      </div>
+    </section>
+
+	<section id="fav-tech" class="section">
+		<h2 class="section-title">Current favorite <span class="text-gradient">Tech/Tools</span></h2>
+		<div class="skill-set">
+			{allSkills.filter((i: any) => i.featured == true).map((skill: any) => (
+				<div class="skill featured-skill">{skill.name}</div>
+			))}
+		</div>
+	</section>
+
+	<section id="all-tech" class="section">
+		<h2 class="section-title">All <span class="text-gradient">Tech/Tools</span></h2>
+		<div class="skill-set">
+			{allSkills.filter((i: any) => i.featured == false).map((skill: any) => (
+				<div class="skill">{skill.name}</div>
+			))}
+		</div>
+	</section>
+
+    <section id="projects" class="section projects-section animate-fade-in" style="animation-delay: 0.2s;">
+      <h2 class="section-title">Featured <span class="text-gradient">Projects</span></h2>
+      <div class="grid">
+        {featuredProjects.map((project: any) => (
+          <ProjectCard 
+            title={project.data.title}
+            description={project.data.description}
+            url={`/projects/${project.id}`}
+            tags={project.data.tags}
+          />
+        ))}
+      </div>
+    </section>
+
+    <section class="section blog-section animate-fade-in" style="animation-delay: 0.4s;">
+      <h2 class="section-title">Recent <span class="text-gradient">Writings</span></h2>
+      <div class="grid">
+        {recentPosts.map((post: any) => (
+          <BlogCard 
+            title={post.data.title}
+            description={post.data.description || "Read more about this topic in the full article."}
+            date={post.data.publishDate}
+            url={`/blog/${post.id}`}
+          />
+        ))} 
+      </div>
+      <div class="view-all">
+        <a href="/blog" class="text-gradient view-all-link">View all posts &rarr;</a>
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  .hero {
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .hero-content {
+    max-width: 800px;
+  }
+
+  .title {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    margin-bottom: var(--space-xl);
+    max-width: 600px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .primary-btn {
+    background: var(--accent-primary);
+    color: var(--bg-base);
+    box-shadow: 0 4px 14px var(--accent-glow);
+  }
+
+  .primary-btn:hover {
+    background: var(--accent-secondary);
+    box-shadow: 0 6px 20px var(--border-glow);
+    transform: translateY(-2px);
+    color: #fff;
+  }
+
+  .secondary-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+  }
+
+  .secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .section {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+  }
+  
+  .view-all {
+    margin-top: var(--space-lg);
+    text-align: right;
+  }
+  
+  .view-all-link {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .view-all-link:hover {
+    text-decoration: underline;
+  }
+
+  .skill-set{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 16px;
+  }
+
+  .skill {
+	border: 1px var(--accent-secondary) solid;
+	padding: 10px 20px;
+	border-radius: var(--border-radius-sm);
+  }
+
+  .featured-skill {
+
+  }
+</style>

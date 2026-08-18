@@ -1,0 +1,93 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<Layout title={`${project.data.title} - Project`}>
+  <main class="project-page">
+    <div class="back-link">
+      <a href="/">&larr; Back to Home</a>
+    </div>
+    
+    <header class="project-header animate-fade-in">
+      <h1 class="title">{project.data.title}</h1>
+      <p class="description text-muted">{project.data.description}</p>
+      
+      {project.data.tags && project.data.tags.length > 0 && (
+        <ul class="tags">
+          {project.data.tags.map((tag) => (
+            <li class="tag">{tag}</li>
+          ))}
+        </ul>
+      )}
+    </header>
+
+    <article class="prose animate-fade-in" style="animation-delay: 0.2s;">
+      <Content />
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .project-page {
+    padding-top: var(--space-lg);
+  }
+
+  .back-link {
+    margin-bottom: var(--space-xl);
+  }
+
+  .back-link a {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .back-link a:hover {
+    color: var(--accent-primary);
+  }
+
+  .project-header {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .description {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-lg);
+    max-width: 800px;
+  }
+
+  .tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.25rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-main);
+  }
+</style>

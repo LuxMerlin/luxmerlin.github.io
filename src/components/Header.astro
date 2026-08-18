@@ -1,0 +1,81 @@
+---
+---
+<header class="main-header">
+  <div class="header-content">
+    <a href="/" class="logo">
+      <span class="text-gradient first-name">Ryan</span>O'Donnell
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Project</a></li>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .main-header {
+    position: sticky;
+    margin: 0;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: var(--space-lg);
+  }
+
+  .nav-links a {
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    position: relative;
+  }
+  
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-primary);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: var(--accent-primary);
+  }
+  
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .first-name {
+    padding-right: 3px;
+  }
+</style>

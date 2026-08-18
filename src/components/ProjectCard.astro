@@ -1,0 +1,85 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  tags?: string[];
+}
+
+const { title, description, url, tags = [] } = Astro.props;
+---
+
+<a href={url} class="card-link">
+  <article class="interactive-card glass-panel project-card">
+    <div class="card-content">
+      <h3>{title}</h3>
+      <p class="text-muted">{description}</p>
+      
+      {tags.length > 0 && (
+        <ul class="tags">
+          {tags.map((tag) => (
+            <li class="tag">{tag}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </article>
+</a>
+
+<style>
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .card-link:hover {
+    color: inherit;
+  }
+
+  .project-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-content {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  h3 {
+    margin-bottom: var(--space-sm);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+  }
+  
+  .interactive-card:hover h3 {
+    color: var(--accent-primary);
+  }
+
+  p {
+    flex-grow: 1;
+    margin-bottom: var(--space-md);
+  }
+
+  .tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-main);
+  }
+</style>

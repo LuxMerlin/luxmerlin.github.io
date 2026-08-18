@@ -1,0 +1,22 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="main-footer">
+  <div class="footer-content">
+    <p>&copy; {year} Senior SWE Portfolio. Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>.</p>
+  </div>
+</footer>
+
+<style>
+  .main-footer {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+  }
+  
+  .footer-content p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+</style>
