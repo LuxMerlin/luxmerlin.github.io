@@ -1,0 +1,72 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import WorkCard from '../../components/WorkCard.astro';
+
+const allProjects = await getCollection('work');
+const sortedProjects = allProjects.sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
+
+const renderedPosts = await Promise.all(
+  sortedProjects.map(async (project) => {
+    const { Content } = await render(project);
+    return { project, Content };
+  })
+);
+---
+
+<Layout title="Work - Senior Software Engineer">
+  <main class="project-index">
+    <header class="page-header animate-fade-in">
+      <h1 class="title"><span class="text-gradient">Work</span></h1>
+      <p class="subtitle text-muted">Work Experience</p>
+    </header>
+
+    <div class="wrapper animate-fade-in" style="animation-delay: 0.2s;">
+          {renderedPosts.map(({ project, Content }, index) => (
+              <>
+                <WorkCard 
+                  title={project.data.title}
+                  company={project.data.company}
+                  startDate={project.data.startDate}
+                  endDate={project.data.endDate}
+                  tags={project.data.tags}
+                  Content={Content}
+                />
+                {index < renderedPosts.length - 1 && (
+                  <div class="spacer">*</div>
+                )}
+              </>
+            ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .project-index {
+    padding-top: var(--space-lg);
+  }
+
+  .page-header {
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  .spacer{
+    margin: 0 auto;
+  }
+</style>

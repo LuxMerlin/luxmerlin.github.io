@@ -1,0 +1,108 @@
+---
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+
+interface Props {
+  title: string;
+  company: string;
+  startDate: Date;
+  endDate: Date | undefined;
+  tags?: string[];
+  Content: AstroComponentFactory;
+}
+
+const { title, company, startDate, endDate, tags = [], Content } = Astro.props;
+
+const formatDate = (date: any) => {
+  return date?.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'short'}) ?? 'Present';
+};
+---
+
+<article class="interactive-card glass-panel work-card">
+    <div class="card-content">
+      <div class="work-card-header">
+        <h3>{title}</h3>
+        <div>{formatDate(startDate)} <span>-</span> {formatDate(endDate)}</div>
+      </div>
+      <h4>{company}</h4>
+      
+      {tags.length > 0 && (
+        <ul class="tags">
+          {tags.map((tag) => (
+            <li class="tag">{tag}</li>
+          ))}
+        </ul>
+      )}
+    <div>
+      <Content/>
+    </div>
+    </div>
+  </article>
+
+<style scoped>
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .card-link:hover {
+    color: inherit;
+  }
+
+  .work-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .work-card-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .card-content {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 5px;
+  }
+
+  h3 {
+    margin-bottom: var(--space-sm);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+  }
+  
+  .interactive-card:hover h3 {
+    color: var(--accent-primary);
+  }
+
+  p {
+    flex-grow: 1;
+    margin-bottom: var(--space-md);
+  }
+
+  .tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-main);
+  }
+
+
+</style>
