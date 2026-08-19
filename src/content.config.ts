@@ -1,8 +1,11 @@
 import { z, defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+//pattern will get any md or mdx files, ignoring files with a _ prefix
+const filePattern = "**/[^_]*.{md,mdx}";
+
 const projectCollection = defineCollection({
-  loader: glob({ pattern: "*.{md,mdx}", base: "./src/content/projects" }),
+  loader: glob({ pattern: filePattern, base: "./src/content/projects" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -13,7 +16,7 @@ const projectCollection = defineCollection({
 });
 
 const blogCollection = defineCollection({
-  loader: glob({ pattern: "*.{md,mdx}", base: "./src/content/blog" }),
+  loader: glob({ pattern: filePattern, base: "./src/content/blog" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
